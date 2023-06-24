@@ -14,7 +14,7 @@ class Reader:
 
         for char in f.read():
             # add the character to the word if it's alphabetical.
-            if char.isalpha() or char in allowed:
+            if char.isalnum() or char in allowed:
                 word += char
             # otherwise pinch it off.
             else:
@@ -35,6 +35,8 @@ class Reader:
     def __index__(self, i):
         return self.words[i]
 
+
+
 def parse_text(text):
     freq = {}
     last_word = text[0]
@@ -54,6 +56,8 @@ def parse_text(text):
         last_word = word
     
     return freq
+
+
 
 def get_next_word(words):
     # return the next random word given a probability dictionary.
@@ -79,11 +83,13 @@ def construct_sentence(freq):
 def construct_text(freq, sentences=1):
     return '\n'.join(construct_sentence(freq) for i in range(sentences))
 
+
+
 if __name__ == "__main__":
     # read in the passage of text.
     print("===== reading the input text =====")
     text = Reader()
-    with open("./thelorax.txt", 'r') as file:
+    with open("./philosophy.txt", 'r') as file:
         text.read(file)
     print(text)
 
